@@ -9,7 +9,7 @@ https://www.imdb.com/search/title/?genres=action&explore=title_type,genres&pf_rd
 IMDb is the world's most popular and authoritative source for movie, TV and celebrity content. Find ratings and reviews for the newest movie and TV shows. 
 We wanted to focus our only on the Action TV-Show and Movies. 
 
-To retrieve and print the data you just need to run the python code after installing 2 packages (Requests and bs4). 
+To retrieve and print the data you just need to run the python code after installing 2 packages (Requests and bs4). Please refer to the requirement.txt for that. 
 It will automatically give you the main information about each TV-Show and Movies : 
 - Title
 - Date
