@@ -1,5 +1,5 @@
-pip beautifulsoup4
-pip requests
-pip pymysql
-pip argparse
-pip re
+beautifulsoup4
+requests
+pymysql
+argparse
+re
