@@ -21,3 +21,8 @@ It will automatically give you the main information about each TV-Show and Movie
 
 We had some issues to retrieve some informations because they were stored in another URL. So we need to select the URL of each movies, enter in it and retrieve the additional datas. 
 Alos, we wanted to have the datas for all Action movies, not only the one showed in the 1st page. We used the same logic as before to browse page by page automaticaly and print all the datas. 
+
+
+[Diagram_DB.pdf](https://github.com/ArielCohen1995/IMDB_Project/files/10098953/Diagram_DB.pdf)
+
+The 
