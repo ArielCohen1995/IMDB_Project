@@ -25,4 +25,13 @@ Alos, we wanted to have the datas for all Action movies, not only the one showed
 
 [Diagram_DB.pdf](https://github.com/ArielCohen1995/IMDB_Project/files/10098953/Diagram_DB.pdf)
 
-The 
+The IMBD Databases contains several tables: 
+- Global : where we stock the main information about the Movies, TV-Shows, ...
+- Genres : where we stock the genre of each movies
+- Synopsis : where we stock the resume of each movies
+- Actors : where we stock the actors of each movies
+- Producers : where we stock the staffing id of each movies
+- Producers_Details : where we stock the works, names, id of each producer 
+
+Please find in the diagram the link between each table of the IMDB Database
+
