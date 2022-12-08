@@ -1,5 +1,4 @@
 import os
-
 from web_scraping import *
 from imdb_db import *
 import argparse
@@ -29,6 +28,12 @@ if __name__ == '__main__':
         url_thriller = config['URL_THRILLER']
 
     args = get_args()
-    init_DB()
+    
+    connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+    cursor = connection.cursor()
+    cursor.execute("SHOW DATABASES LIKE 'IMDb_DB';")
+    if cursor.fetchall() is None:
+        init_DB()
+        
     data_retrieving(args, url_action)
     logging.info('Finished')
