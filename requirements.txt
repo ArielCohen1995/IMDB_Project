@@ -3,3 +3,7 @@ requests
 pymysql
 argparse
 re
+os 
+json
+ast
+logging
