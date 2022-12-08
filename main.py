@@ -29,10 +29,7 @@ if __name__ == '__main__':
 
     args = get_args()
     
-    connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
-    cursor = connection.cursor()
-    cursor.execute("SHOW DATABASES LIKE 'IMDb_DB';")
-    if cursor.fetchall() is None:
+    if not check_DB_exist():
         init_DB()
         
     data_retrieving(args, url_action)
