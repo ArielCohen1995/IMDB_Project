@@ -1,7 +1,20 @@
 import pymysql
 import json
 
+def check_DB_exist():
+    """This function allows to check if the Databases already exist or not"""
+    with open('conf_IMDB.json') as json_config:
+        config = json.load(json_config)
+        connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+        cursor = connection.cursor()
+        cursor.execute("SHOW DATABASES LIKE 'IMDb_DB';")
 
+    if not cursor.fetchall():
+        return False
+    else:
+        return True
+    
+    
 def init_DB():
     """This function allows to create Databases"""
     with open('conf_IMDB.json') as json_config:
