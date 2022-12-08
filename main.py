@@ -1,5 +1,4 @@
 import os
-
 from web_scraping import *
 from imdb_db import *
 import argparse
