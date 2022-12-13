@@ -55,8 +55,9 @@ def get_movie_data(movie, args, headers, api_key):
     movie_id = int(''.join(c for c in movie_url if c.isdigit()))
     genre = movie.find(class_="genre").string.strip().split(',')
     if movie.find(class_='text-muted'):
-        year = movie.find(class_='text-muted').string[1:-1]
-        release_year = int(re.findall('[0-9]{4}', year)[0])
+        if movie.find(class_='text-muted').string :
+            year = movie.find(class_='text-muted').string[1:-1]
+            release_year = int(re.findall('[0-9]{4}', year)[0])
     else :
         release_year = None
     if movie.strong:
