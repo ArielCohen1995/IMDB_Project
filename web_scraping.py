@@ -54,12 +54,11 @@ def get_movie_data(movie, args, headers, api_key):
     omdb_id = movie_url.split('/')[2]
     movie_id = int(''.join(c for c in movie_url if c.isdigit()))
     genre = movie.find(class_="genre").string.strip().split(',')
+    release_year = None
     if movie.find(class_='text-muted'):
         if movie.find(class_='text-muted').string :
             year = movie.find(class_='text-muted').string[1:-1]
             release_year = int(re.findall('[0-9]{4}', year)[0])
-    else :
-        release_year = None
     if movie.strong:
         rating = float(movie.strong.string)
     else:
