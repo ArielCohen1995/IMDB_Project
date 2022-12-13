@@ -2,8 +2,3 @@ beautifulsoup4
 requests
 pymysql
 argparse
-regex
-os 
-json
-ast
-logging
