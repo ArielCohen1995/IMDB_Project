@@ -1,6 +1,7 @@
 import pymysql
 import json
 
+
 def check_DB_exist():
     """This function allows to check if the Databases already exist or not"""
     with open('conf_IMDB.json') as json_config:
@@ -13,8 +14,8 @@ def check_DB_exist():
         return False
     else:
         return True
-    
-    
+
+
 def init_DB():
     """This function allows to create Databases"""
     with open('conf_IMDB.json') as json_config:
@@ -22,59 +23,137 @@ def init_DB():
         connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
         cursor = connection.cursor()
 
-    try:
-        #cursor.execute("DROP DATABASE ariel_kevin")
-        #connection.commit()
-
         cursor.execute("CREATE DATABASE ariel_kevin")
         connection.commit()
 
-        cursor.execute("CREATE TABLE ariel_kevin.global ("
-                       "id INT PRIMARY KEY,"
-                       "title VARCHAR(150),"
-                       "type_input VARCHAR(150),"
-                       "year_released INT,"
-                       "rating_IMDB REAL,"
-                       "rating_Rot_To REAL,"
-                       "rating_Metacritic REAL)")
+
+def create_table_global():
+    """Creates table global"""
+    with open('conf_IMDB.json') as json_config:
+        config = json.load(json_config)
+        connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+        cursor = connection.cursor()
+
+        query = """
+                CREATE TABLE IF NOT EXISTS ariel_kevin.global (
+                id INT PRIMARY KEY,
+                title VARCHAR(150),
+                type_input VARCHAR(150),
+                year_released INT,
+                rating_IMDB REAL,
+                rating_Rot_To REAL,
+                rating_Metacritic REAL
+                );
+                """
+        cursor.execute(query)
         connection.commit()
 
-        cursor.execute("CREATE TABLE ariel_kevin.genres ("
-                       "movie_id INT,"
-                       "genre VARCHAR(150))")
+
+def create_table_genre():
+    """Creates table genre"""
+    with open('conf_IMDB.json') as json_config:
+        config = json.load(json_config)
+        connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+        cursor = connection.cursor()
+
+        query = """
+                CREATE TABLE IF NOT EXISTS ariel_kevin.genres (
+                    movie_id INT,
+                    genre VARCHAR(150)
+                );
+        """
+        cursor.execute(query)
         connection.commit()
 
-        cursor.execute("CREATE TABLE ariel_kevin.synopsis ("
-                       "movie_id INT PRIMARY KEY,"
-                       "resume TEXT)")
+
+def create_table_synopsis():
+    """Creates table synopsis"""
+    with open('conf_IMDB.json') as json_config:
+        config = json.load(json_config)
+        connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+        cursor = connection.cursor()
+
+        query = """
+                CREATE TABLE IF NOT EXISTS ariel_kevin.synopsis (
+                    movie_id INT PRIMARY KEY,
+                    resume TEXT
+                );
+        """
+        cursor.execute(query)
         connection.commit()
 
-        cursor.execute("CREATE TABLE ariel_kevin.actors ("
-                       "id INT ,"
-                       "movie_id INT)")
+
+def create_table_actors():
+    """Creates table actors"""
+    with open('conf_IMDB.json') as json_config:
+        config = json.load(json_config)
+        connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+        cursor = connection.cursor()
+
+        query = """
+                CREATE TABLE IF NOT EXISTS ariel_kevin.actors (
+                    id INT ,
+                    movie_id INT
+                );
+        """
+        cursor.execute(query)
         connection.commit()
 
-        cursor.execute("CREATE TABLE ariel_kevin.actors_details ("
-                       "id INT PRIMARY KEY,"
-                       "name VARCHAR(150))")
+
+def create_table_actors_details():
+    """Creates table actors_details"""
+    with open('conf_IMDB.json') as json_config:
+        config = json.load(json_config)
+        connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+        cursor = connection.cursor()
+
+        query = """
+                CREATE TABLE IF NOT EXISTS ariel_kevin.actors_details (
+                    id INT PRIMARY KEY,
+                    name VARCHAR(150)
+                );
+        """
+        cursor.execute(query)
         connection.commit()
 
-        cursor.execute("CREATE TABLE ariel_kevin.producers ("
-                       "movie_id INT,"
-                       "id INT,"
-                       "work VARCHAR(150))")
+
+def create_table_producers():
+    """Creates table producers"""
+    with open('conf_IMDB.json') as json_config:
+        config = json.load(json_config)
+        connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+        cursor = connection.cursor()
+
+        query = """
+                CREATE TABLE IF NOT EXISTS ariel_kevin.producers (
+                    movie_id INT,
+                    id INT ,
+                    work VARCHAR(150)
+                );
+                """
+        cursor.execute(query)
         connection.commit()
 
-        cursor.execute("CREATE TABLE ariel_kevin.producers_details ("
-                       "id INT PRIMARY KEY,"
-                       "name VARCHAR(150))")
+
+def create_table_producers_details():
+    """Creates table producers_details"""
+    with open('conf_IMDB.json') as json_config:
+        config = json.load(json_config)
+        connection = pymysql.connect(user=config['USER'], password=config['PASSWORD'], host=config['HOST'])
+        cursor = connection.cursor()
+
+        query = """
+                CREATE TABLE IF NOT EXISTS ariel_kevin.producers_details (
+                    id INT PRIMARY KEY,
+                    name VARCHAR(150)
+                );
+        """
+        cursor.execute(query)
         connection.commit()
 
-    except pymysql.err.InterfaceError:
-        pass
 
-
-def update_global_table(movie_id, title, movie_or_tv, release_year, genre, rating_IMDB, resume, prod, actors, rating_Rot_To, rating_Metacritic):
+def update_global_table(movie_id, title, movie_or_tv, release_year, genre, rating_IMDB, resume, prod, actors,
+                        rating_Rot_To, rating_Metacritic):
     """This function allows to load the different tables from the web scrapping information retrieved"""
     with open('conf_IMDB.json') as json_config:
         config = json.load(json_config)
@@ -82,8 +161,11 @@ def update_global_table(movie_id, title, movie_or_tv, release_year, genre, ratin
         cursor = connection.cursor()
 
     try:
-        cursor.execute("INSERT INTO ariel_kevin.global (id, title, type_input, year_released, rating_IMDB, rating_Rot_To, rating_Metacritic) "
-                       "VALUES (%s, %s, %s, %s, %s, %s, %s);", (movie_id, title, movie_or_tv, release_year, rating_IMDB, rating_Rot_To, rating_Metacritic))
+        cursor.execute(
+            "INSERT INTO ariel_kevin.global (id, title, type_input, year_released, rating_IMDB, rating_Rot_To, "
+            "rating_Metacritic) "
+            "VALUES (%s, %s, %s, %s, %s, %s, %s);",
+            (movie_id, title, movie_or_tv, release_year, rating_IMDB, rating_Rot_To, rating_Metacritic))
         connection.commit()
 
         for g in genre:
@@ -119,7 +201,8 @@ def update_global_table(movie_id, title, movie_or_tv, release_year, genre, ratin
             "rating_IMDB = %s, "
             "rating_Rot_To = %s, "
             "rating_Metacritic = %s "
-            "WHERE id = %s", (title, movie_or_tv, release_year, rating_IMDB, rating_Rot_To, rating_Metacritic, movie_id))
+            "WHERE id = %s",
+            (title, movie_or_tv, release_year, rating_IMDB, rating_Rot_To, rating_Metacritic, movie_id))
         connection.commit()
 
         for g in genre:
@@ -167,3 +250,4 @@ def update_global_table(movie_id, title, movie_or_tv, release_year, genre, ratin
                 "name = %s "
                 "WHERE id = %s", (staff[0], staff[1]))
             connection.commit()
+
