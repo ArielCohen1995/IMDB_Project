@@ -2,7 +2,7 @@ beautifulsoup4
 requests
 pymysql
 argparse
-re
+regex
 os 
 json
 ast
