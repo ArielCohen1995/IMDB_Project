@@ -9,7 +9,7 @@ import logging
 
 def check_item(movie_or_tv, year, genre, movie_or_tv_filter, genre_filter, year_beg_filter, year_end_filter):
     """Returns True if the movie passes the filter and False otherwise"""
-    if (not year) or if (not movie_or_tv) or if (not genre):
+    if (not year) or (not movie_or_tv) or (not genre):
         return False
     if movie_or_tv != movie_or_tv_filter:
         return False
