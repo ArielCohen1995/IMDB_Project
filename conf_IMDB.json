@@ -9,11 +9,11 @@
 
   "HEADERS": "{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'}",
 
-  "USER": "root", 
+  "USER": "ariel_kevin", 
 
-  "PASSWORD": "Arielou95!", 
+  "PASSWORD": "ariel_kevin", 
 
-  "HOST": "localhost",
+  "HOST": "data-mining-db1.cttpnp4olbpx.us-west-1.rds.amazonaws.com",
 
   "API_KEY": "3d8f2b43"
 }
