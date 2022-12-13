@@ -59,7 +59,9 @@ def get_movie_data(movie, args, headers, api_key):
     if movie.find(class_='text-muted'):
         if movie.find(class_='text-muted').string :
             year = movie.find(class_='text-muted').string[1:-1]
-            release_year = int(re.findall('[0-9]{4}', year)[0])
+            tmp = re.findall('[0-9]{4}', year)
+            if tmp:
+                release_year = int(tmp[0])
     if movie.strong:
         rating = float(movie.strong.string)
     else:
