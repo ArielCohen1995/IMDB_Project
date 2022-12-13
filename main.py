@@ -32,5 +32,13 @@ if __name__ == '__main__':
     if not check_DB_exist():
         init_DB()
 
+    create_table_global()
+    create_table_genre()
+    create_table_synopsis()
+    create_table_actors()
+    create_table_actors_details()
+    create_table_producers()
+    create_table_producers_details()
+
     data_retrieving(args, url_action)
     logging.info('Finished')
