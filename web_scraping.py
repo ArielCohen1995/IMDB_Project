@@ -108,7 +108,10 @@ def get_ratings(movie_id, api_key):
     if page.status_code != 200:
         logging.error("URL doesn't exist ! Failed")
     movie_json = page.json()
-   
+    
+    rotten_rating = None
+    meta_rating = None
+    
     if 'Ratings' in movie_json:
         if movie_json['Ratings'] != []:
             rotten_rating = get_rotten_rating(movie_json['Ratings'])
@@ -117,10 +120,7 @@ def get_ratings(movie_id, api_key):
             meta_rating = get_meta_rating(movie_json['Ratings'])
             if meta_rating:
                 meta_rating = float(meta_rating.split('/')[0])/10
-    else:
-        rotten_rating = None
-        meta_rating = None
-
+   
     return rotten_rating, meta_rating
 
 
