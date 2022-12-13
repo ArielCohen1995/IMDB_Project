@@ -1,5 +1,5 @@
 import requests
-import regex as re
+import re
 from bs4 import BeautifulSoup
 from imdb_db import update_global_table
 import json
