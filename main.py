@@ -18,7 +18,7 @@ def get_args():
 
 if __name__ == '__main__':
     # This is the url from the action category in the website, but it could work for the other ones too.
-    logging.basicConfig(filename=os.getcwd() + '/IMDB.log', encoding='utf-8', level=logging.INFO)
+    logging.basicConfig(filename=os.getcwd() + '/IMDB.log', level=logging.INFO)
 
     with open('conf_IMDB.json') as json_config:
         config = json.load(json_config)
