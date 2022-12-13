@@ -7,12 +7,12 @@ import json
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('movie_or_tv', type=str, choices=['Movie', 'TV'], action='store', const='Movie', nargs='?')
+    parser.add_argument('movie_or_tv', type=str, choices=['Movie', 'TV'], action='store', const='Movie', default='Movie', nargs='?')
     parser.add_argument('genre', type=str, choices=['Action', 'Comedy', 'Drama', 'Thriller', 'Adventure', 'Animation',
                                                     'Romance', 'Musical', 'Crime', 'All'], const='All', nargs='?',
-                        help="Choose a genre.")
-    parser.add_argument('year_beg', type=int, const=1, nargs='?')
-    parser.add_argument('year_end', type=int, const=2022, nargs='?')
+                        default='All', help="Choose a genre.")
+    parser.add_argument('year_beg', type=int, const=1, nargs='?', default=1)
+    parser.add_argument('year_end', type=int, const=2022, nargs='?', default=2022)
     return parser.parse_args()
 
 
@@ -28,9 +28,9 @@ if __name__ == '__main__':
         url_thriller = config['URL_THRILLER']
 
     args = get_args()
-    
+
     if not check_DB_exist():
         init_DB()
-        
+
     data_retrieving(args, url_action)
     logging.info('Finished')

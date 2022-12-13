@@ -1,5 +1,5 @@
 import requests
-import re
+import regex as re
 from bs4 import BeautifulSoup
 from imdb_db import update_global_table
 import json
@@ -9,6 +9,7 @@ import logging
 
 def check_item(movie_or_tv, year, genre, movie_or_tv_filter, genre_filter, year_beg_filter, year_end_filter):
     """Returns True if the movie passes the filter and False otherwise"""
+
     if movie_or_tv != movie_or_tv_filter:
         return False
     if genre_filter != 'All' and genre_filter not in genre:
@@ -84,17 +85,36 @@ def get_movie_data(movie, args, headers, api_key):
         return None
 
 
+def get_rotten_rating(ratings):
+    """This function allows to retrieve the rating of Rotten Tomatoes from API"""
+    for element in ratings:
+        if element['Source'] == "Rotten Tomatoes":
+            return element['Value']
+    return None
+
+
+def get_meta_rating(ratings):
+    """This function allows to retrieve the rating of Metacritic from API"""
+    for element in ratings:
+        if element['Source'] == "Metacritic":
+            return element['Value']
+    return None
+
+
 def get_ratings(movie_id, api_key):
+    """This function allows to retrieve the rating from the API"""
     omdb_url = 'http://www.omdbapi.com/?apikey=' + api_key + '&i=' + movie_id
     page = requests.get(omdb_url)
     if page.status_code != 200:
         logging.error("URL doesn't exist ! Failed")
     movie_json = page.json()
     if movie_json['Ratings'] != []:
-        rotten_rating = movie_json['Ratings'][1]['Value']
-        meta_rating = movie_json['Ratings'][2]['Value']
-        rotten_rating = float(rotten_rating.split('%')[0])/10
-        meta_rating = float(meta_rating.split('/')[0])/10
+        rotten_rating = get_rotten_rating(movie_json['Ratings'])
+        if rotten_rating:
+            rotten_rating = float(rotten_rating.split('%')[0])/10
+        meta_rating = get_meta_rating(movie_json['Ratings'])
+        if meta_rating:
+            meta_rating = float(meta_rating.split('/')[0])/10
     else:
         rotten_rating = None
         meta_rating = None
