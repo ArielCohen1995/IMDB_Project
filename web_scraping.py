@@ -158,10 +158,13 @@ def data_retrieving(args, my_url):
 
         movie = movies_list.find(class_="lister-item")
         while movie:
-            data = get_movie_data(movie, args, headers, api_key)
-            if data:
-                update_global_table(*data)
-                logging.info(f'Retrieving movie :{data[1]}')
-            movie = movie.next_sibling.next_sibling
+            try:
+                data = get_movie_data(movie, args, headers, api_key)
+                if data:
+                    update_global_table(*data)
+                    logging.info(f'Retrieving movie :{data[1]}')
+                movie = movie.next_sibling.next_sibling
+            except AttributeError:
+                movie = movie.next_sibling.next_sibling
 
         page = requests.get(next_url, headers=headers)
