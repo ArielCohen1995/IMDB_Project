@@ -222,13 +222,6 @@ def update_global_table(movie_id, title, movie_or_tv, release_year, genre, ratin
 
         for actor in actors:
             cursor.execute(
-                "UPDATE ariel_kevin.actors "
-                "SET "
-                "id = %s "
-                "WHERE movie_id = %s", (actor[1], movie_id))
-            connection.commit()
-
-            cursor.execute(
                 "UPDATE ariel_kevin.actors_details "
                 "SET "
                 "name = %s "
@@ -236,14 +229,6 @@ def update_global_table(movie_id, title, movie_or_tv, release_year, genre, ratin
             connection.commit()
 
         for staff in prod:
-            cursor.execute(
-                "UPDATE ariel_kevin.producers "
-                "SET "
-                "id = %s, "
-                "work = %s "
-                "WHERE movie_id = %s", (staff[1], staff[2], movie_id))
-            connection.commit()
-
             cursor.execute(
                 "UPDATE ariel_kevin.producers_details "
                 "SET "
