@@ -76,9 +76,17 @@ def get_movie_data(movie, args, headers, api_key):
         logging.error("URL doesn't exist ! Failed")
 
     movie_soup = BeautifulSoup(movie_page.content, "html.parser")
-
+    
     if movie_soup.find(role="presentation", class_="ipc-inline-list__item", string="TV Series"):
         movie_or_tv = "TV"
+    elif movie_soup.find(role="presentation", class_="ipc-inline-list__item", string="Video Game"):
+        movie_or_tv = "Video Game"
+    elif movie_soup.find(role="presentation", class_="ipc-inline-list__item", string="Video"):
+        movie_or_tv = "Video"
+    elif movie_soup.find(role="presentation", class_="ipc-inline-list__item", string="Podcast Series"):
+        movie_or_tv = "Podcast Series"
+    elif movie_soup.find(role="presentation", class_="ipc-inline-list__item", string="Music Video"):
+        movie_or_tv = "Music Video"
     else:
         movie_or_tv = "Movie"
 
