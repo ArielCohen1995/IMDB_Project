@@ -205,14 +205,6 @@ def update_global_table(movie_id, title, movie_or_tv, release_year, genre, ratin
             (title, movie_or_tv, release_year, rating_IMDB, rating_Rot_To, rating_Metacritic, movie_id))
         connection.commit()
 
-        for g in genre:
-            cursor.execute(
-                "UPDATE ariel_kevin.genres "
-                "SET "
-                "genre = %s "
-                "WHERE movie_id = %s", (g, movie_id))
-            connection.commit()
-
         cursor.execute(
             "UPDATE ariel_kevin.synopsis "
             "SET "
